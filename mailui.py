@@ -2,6 +2,7 @@ import sys
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLineEdit, QTextEdit, 
                              QLabel, QDialog, QTableWidget, QTableWidgetItem, QMessageBox, QMenuBar, QHeaderView)
 from PyQt6.QtGui import QAction
+from PyQt6.QtWidgets import QComboBox
 import boto3
 from botocore.exceptions import ClientError
 
@@ -12,7 +13,16 @@ class SettingsDialog(QDialog):
         layout = QVBoxLayout()
         self.aws_access_key_id_input = QLineEdit()
         self.aws_secret_access_key_input = QLineEdit()
-        self.aws_region_input = QLineEdit()
+        self.aws_region_input = QComboBox()
+        self.aws_region_input.setEditable(True)  # 允许用户输入值
+        # 填充一些常见的AWS区域
+        common_regions = [
+            'us-east-1', 'us-west-1', 'us-west-2',
+            'eu-west-1', 'eu-central-1', 'ap-southeast-1',
+            'ap-southeast-2', 'ap-northeast-1', 'sa-east-1'
+        ]
+        self.aws_region_input.addItems(common_regions)
+
         layout.addWidget(QLabel("AWS Access Key ID:"))
         layout.addWidget(self.aws_access_key_id_input)
         layout.addWidget(QLabel("AWS Secret Access Key:"))
@@ -28,7 +38,7 @@ class SettingsDialog(QDialog):
         return {
             "aws_access_key_id": self.aws_access_key_id_input.text(),
             "aws_secret_access_key": self.aws_secret_access_key_input.text(),
-            "aws_region": self.aws_region_input.text(),
+            "aws_region": self.aws_region_input.currentText(),  # 获取用户选择或输入的区域
         }
 
 class RecipientsDialog(QDialog):
