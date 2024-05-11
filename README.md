@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Email Sender Application
 
 ## Description
@@ -40,4 +39,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 =======
 # awsSESBulkMailer
 Send emails in bulk via aws SES. Operate through an intuitive ui.
->>>>>>> 94e444ab5ebc2f1b49855f66cf1e681df17d6a45
